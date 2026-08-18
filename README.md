@@ -1,2 +1,2 @@
 ## GITHUB REPOSITORY
-https://github.com/kkprojects5/wanderlist-
+https://github.com/kkprojects5/wanderlist-/releases/tag/week-3

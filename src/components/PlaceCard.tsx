@@ -1,22 +1,14 @@
 import { Place } from "@/lib/types";
 import { StyleSheet, Text, View } from "react-native";
-//move to types.ts
-//type PlaceCardProps = {
-// id: string;
-//name: string;
-// notes: string;
-// category: "city" | "nature" | "food" | "other"; 
-//};
 
-export default function PlaceCard({ id, name, category, 
-  notes }: Place) {
+export default function PlaceCard({ place }: { place: Place }) {
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.category}>{category}</Text>
+        <Text style={styles.name}>{place.name}</Text>
+        <Text style={styles.category}>{place.category}</Text>
       </View>
-      <Text style={styles.notes}>{notes}</Text>
+      <Text style={styles.notes}>{place.notes}</Text>
     </View>
   );
 }
