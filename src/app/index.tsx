@@ -8,7 +8,11 @@ import {
   StyleSheet,
   Text,
   View,
+  Pressable,
+  Button,
 } from "react-native";
+import { Link } from "expo-router";
+import { getCities } from "@/lib/api";
 
 export default function Index() {
   const { places } = usePlaces();
@@ -25,22 +29,41 @@ export default function Index() {
         style={styles.hero}
       />
 
-      {/*week 2 lab: one prop in, one style view out */}
       <View style={styles.badgeRow}>
         <Badge label="must-see" />
         <Badge label="budget" />
       </View>
 
+        <Button 
+          title="Load" 
+          onPress={async () => console.log(await getCities())} 
+        />
+        
       <FlatList
         data={places}
         keyExtractor={(place) => place.id}
         contentContainerStyle={{ gap: 12, marginTop: 16 }}
         scrollEnabled={false}
         renderItem={({ item }: { item: Place }) => (
-          <PlaceCard place={item} />
+          <Link
+              href={{
+                pathname: "/place/[id]",
+                params: { id: item.id },
+              }}
+              asChild
+            >
+              <Pressable>
+                <PlaceCard 
+                  id={item.id}
+                  name={item.name}
+                  notes={item.notes}
+                  category={item.category}
+                />
+              </Pressable>
+            </Link>
         )}
         ListEmptyComponent={
-          <Text style={{ color: "#8e8e93", textAlign: "center" }}>No places yet - add one on the Add tab </Text>
+          <Text style={{ color: "#8e8e93", textAlign: "center" }}>No places yet - add one on the Add tab</Text>
         }
       />
     </View>

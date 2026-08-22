@@ -8,16 +8,6 @@ export default function TabLayout() {
       <Tabs>
 
         <Tabs.Screen 
-          name="add" 
-          options={{
-            title: "Add Places",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="add" color={color} size={size} />
-            ),
-          }}
-        />
-
-        <Tabs.Screen 
           name="index" 
           options={{
             title: "Places",
@@ -26,7 +16,24 @@ export default function TabLayout() {
             ),
           }}
         />
-          
+          <Tabs.Screen 
+          name="add" 
+          options={{
+            title: "Add",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="add" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tabs.Screen 
+          name="place/[id]" 
+          options={({ route }) => ({
+            title: (route.params as { name?: string })?.name ?? "Place",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="planet" color={color} size={size} />
+            ),
+          })}
+        />
         <Tabs.Screen 
           name="explore" 
           options={{ 
@@ -46,6 +53,7 @@ export default function TabLayout() {
             ),
           }} 
         />
+         
       </Tabs>
     </PlacesProvider>
   );

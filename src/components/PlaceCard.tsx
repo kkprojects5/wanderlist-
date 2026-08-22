@@ -1,14 +1,24 @@
 import { Place } from "@/lib/types";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function PlaceCard({ place }: { place: Place }) {
+export default function PlaceCard({ 
+  id, 
+  name, 
+  notes, 
+  category 
+}: { 
+  id: string;
+  name: string;
+  notes: string;
+  category: string;
+}) {
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
-        <Text style={styles.name}>{place.name}</Text>
-        <Text style={styles.category}>{place.category}</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.category}>{category}</Text>
       </View>
-      <Text style={styles.notes}>{place.notes}</Text>
+      <Text style={styles.notes}>{notes}</Text>
     </View>
   );
 }
