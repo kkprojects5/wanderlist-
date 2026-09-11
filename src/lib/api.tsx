@@ -1,4 +1,5 @@
 export type City = {
+    id: number;
     name: string;
     country: string;
     region?: string;
@@ -19,4 +20,3 @@ export async function getCities(): Promise<City[]> {
     const body = await response.json();
     return body.data;
 }
- 

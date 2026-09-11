@@ -1,6 +1,6 @@
-import { City, getCities } from "@/lib/api";
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, Text, View } from "react-native";
+import { City, getCities } from "@/lib/api";
 
 export default function Explore() {
     const [cities, setCities] = useState<City[]>([]);
@@ -24,23 +24,28 @@ export default function Explore() {
         load();
     }, []);
 
-    if (loading) return <Text>Loading...</Text>;
-    if (error) return <Text>{error}</Text>;
+    if (loading) return <ActivityIndicator style={styles.screen} />;
+    if (error) return <Text style={styles.error}>{error}</Text>;
 
     return (
-        <View>
+        <View style={styles.screen}>
             <Text style={styles.title}>Explore</Text>
-
             <FlatList
                 data={cities}
-                keyExtractor={(item) => item.name}
-                renderItem={({ item }) => <Text>{item.name}, {item.country} </Text>}
+                keyExtractor={(item) => String(item.id)}
+                renderItem={({ item }) => (
+                    <Text style={styles.row}>
+                        {item.name}, {item.country}
+                    </Text>
+                )}
             />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    screen: { flex: 1, padding: 24 },
     title: { fontSize: 24, fontWeight: "600", marginBottom: 8 },
+    row: { paddingVertical: 8 },
+    error: { padding: 24, color: "#b00020" },
 });
- 
